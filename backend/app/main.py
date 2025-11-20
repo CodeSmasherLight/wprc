@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi import Depends
 from sqlalchemy.orm import Session
 from .database import get_db
@@ -8,7 +8,6 @@ from . import models, crud, schemas
 from .redis_client import redis_client
 from .state_manager import set_state, get_state, clear_state
 from twilio.twiml.messaging_response import MessagingResponse
-from fastapi.responses import PlainTextResponse
 
 
 
@@ -97,23 +96,22 @@ async def whatsapp_webhook(request: Request, db: Session = Depends(get_db)):
 
     state = get_state(sender)
 
-    # start or restart flow
     if state is None or incoming.lower() in ["hi", "hello", "start"]:
         set_state(sender, "await_product")
         resp.message("Which product would you like to review?")
-        return PlainTextResponse(str(resp), media_type="application/xml")
+        return Response(content=str(resp), media_type="application/xml")
 
     step = state["step"]
 
     if step == "await_product":
         set_state(sender, "await_name", product=incoming)
         resp.message("Please enter your name.")
-        return PlainTextResponse(str(resp), media_type="application/xml")
+        return Response(content=str(resp), media_type="application/xml")
 
     if step == "await_name":
         set_state(sender, "await_review", product=state["product"], name=incoming)
         resp.message(f"Share your review for {state['product']}.")
-        return PlainTextResponse(str(resp), media_type="application/xml")
+        return Response(content=str(resp), media_type="application/xml")
 
     if step == "await_review":
         crud.create_review(
@@ -124,9 +122,8 @@ async def whatsapp_webhook(request: Request, db: Session = Depends(get_db)):
             product_review=incoming
         )
         clear_state(sender)
-        resp.message("Thank you! Your review has been recorded.")
-        return PlainTextResponse(str(resp), media_type="application/xml")
+        resp.message("Thank you! Your review has been recorded ✅")
+        return Response(content=str(resp), media_type="application/xml")
 
     resp.message("Something went wrong. Send Hi to start again.")
-    return PlainTextResponse(str(resp), media_type="application/xml")
-
+    return Response(content=str(resp), media_type="application/xml")
