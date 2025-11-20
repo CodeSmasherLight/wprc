@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, TIMESTAMP, text
+from sqlalchemy import Column, Integer, String, Text, TIMESTAMP, text
 from .database import Base
 
 class Review(Base):
