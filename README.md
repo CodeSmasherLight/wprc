@@ -148,7 +148,8 @@ Forwarding https://abcd-1234.ngrok-free.app -> http://localhost:8000
 
 copy HTTPS URL shown after "Forwarding", it will be used in Twilio setup.
 
-![alt text](<Screenshot 2025-11-20 212636.png>)
+<img width="1395" height="271" alt="Screenshot 2025-11-20 212636" src="https://github.com/user-attachments/assets/d971ce5a-2182-49d2-8778-326ecb6cade5" />
+
 
 ---
 
@@ -182,7 +183,8 @@ Hi
 
 Follow the conversation flow as guided by the bot.
 
-![alt text](<Screenshot 2025-11-20 213548.png>)
+<img width="1091" height="608" alt="Screenshot 2025-11-20 213548" src="https://github.com/user-attachments/assets/9d6a1577-af4c-43b8-94f4-62003e060bf0" />
+
 
 ---
 
@@ -242,7 +244,8 @@ http://localhost:5173
 2. Click "Clear" to clear the UI.
 3. Reviews appear only when requested, making the UI efficient and controlled.
 
-![alt text](image.png)
+<img width="814" height="431" alt="Screenshot 2025-11-20 213855" src="https://github.com/user-attachments/assets/cb1ad0b6-3651-4ccb-8773-642cf208d3e8" />
+
 
 ---
 
