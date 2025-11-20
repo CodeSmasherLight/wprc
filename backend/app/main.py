@@ -122,7 +122,7 @@ async def whatsapp_webhook(request: Request, db: Session = Depends(get_db)):
             product_review=incoming
         )
         clear_state(sender)
-        resp.message("Thank you! Your review has been recorded ✅")
+        resp.message(f"Thanks {state["name"]}, Your review for {state['product']} has been recorded successfully.")
         return Response(content=str(resp), media_type="application/xml")
 
     resp.message("Something went wrong. Send Hi to start again.")
